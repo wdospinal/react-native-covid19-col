@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  View, Text, Image, FlatList,
+  View, Text, FlatList,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
 import { PieChart } from 'react-native-chart-kit';
 import { connect } from 'react-redux';
@@ -39,6 +40,7 @@ class Main extends React.PureComponent {
 
   render() {
     const { navigation, cases, dailyUpdate } = this.props;
+    const CustomPieChart = Animatable.createAnimatableComponent(PieChart);
     const chartConfig = {
       backgroundColor: '#e26a00',
       backgroundGradientFrom: '#fb8c00',
@@ -103,27 +105,15 @@ class Main extends React.PureComponent {
             <SummaryText text={cases.Recovered} subText="Recovered" onPress={() => navigation.navigate('Cases', { case: 'Recovered' })} />
             <SummaryText text={cases.Deaths} subText="Deaths" onPress={() => navigation.navigate('Cases', { case: 'Deaths' })} />
           </View>
-          <View>
-            <PieChart
-              data={data}
-              width={300}
-              height={220}
-              chartConfig={chartConfig}
-              accessor="population"
-              backgroundColor="transparent"
-              paddingLeft="15"
-              hasLegend={false}
-            />
-          </View>
         </View>
-        <View style={{ marginTop: 20 }}>
-          <Text style={styles.dailyUpdatesText}>Daily Updates</Text>
+        <View style={{ marginTop: 20, paddingBottom: 100 }}>
+
+          <Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
           <FlatList
-            data={dailyUpdate}
+            data={dailyUpdate.reverse().slice(0, 3)}
             renderItem={renderItem}
             contentContainerStyle={{ marginTop: 20, marginBottom: 20 }}
-            // extraData={forceListRerender}
             inverted
           />
         </View>
