@@ -2,9 +2,7 @@ import React from 'react';
 import {
   View, Text, FlatList,
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types';
-import { PieChart } from 'react-native-chart-kit';
 import { connect } from 'react-redux';
 import { GET_CASES, GET_DAILY } from '../actions/main';
 import { SummaryText, DailyCard, Container } from '../components';
@@ -40,57 +38,6 @@ class Main extends React.PureComponent {
 
   render() {
     const { navigation, cases, dailyUpdate } = this.props;
-    const CustomPieChart = Animatable.createAnimatableComponent(PieChart);
-    const chartConfig = {
-      backgroundColor: '#e26a00',
-      backgroundGradientFrom: '#fb8c00',
-      backgroundGradientTo: '#ffa726',
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16,
-      },
-      propsForDots: {
-        r: '6',
-        strokeWidth: '2',
-        stroke: '#ffa726',
-      },
-    };
-    /*
-    const [cases, setCases] = useState({
-      Confirmed: 0,
-      Recovered: 0,
-      Deaths: 0,
-    });
-    const [dailyUpdate, setDailyUpdate] = useState([]);
-    */
-
-    /*
-    useEffect(() => {
-      fetchCases();
-      fetchDaily();
-    }, []);
-  */
-
-    const data = [
-      {
-        name: 'Confirmed',
-        population: cases.Confirmed ? cases.Confirmed : 0,
-        color: textColor.confirmed,
-
-      },
-      {
-        name: 'Recovered',
-        population: cases.Recovered ? cases.Recovered : 0,
-        color: textColor.recovered,
-      },
-      {
-        name: 'Deaths',
-        population: cases.Deaths ? cases.Deaths : 0,
-        color: textColor.deaths,
-      },
-    ];
 
     function renderItem({ item }) {
       return (
