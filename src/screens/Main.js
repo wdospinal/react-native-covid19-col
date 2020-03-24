@@ -97,9 +97,6 @@ class Main extends React.PureComponent {
     }
     return (
       <Container>
-        <View style={{ margin: 20 }}>
-          <Image source={{ uri: 'https://via.placeholder.com/50x100' }} style={{ height: 50, width: 100 }} />
-        </View>
         <View style={styles.summaryCard}>
           <View>
             <SummaryText text={cases.Confirmed} subText="Confirmed" onPress={() => navigation.navigate('Cases', { case: 'Confirmed' })} />
