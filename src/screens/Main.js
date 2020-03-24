@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { GET_CASES, GET_DAILY } from '../actions/main';
+import { GET_CASES, GET_DAILY } from '../actions';
 import { SummaryText, DailyCard, Container } from '../components';
 import { primaryColor, textColor } from '../config';
 

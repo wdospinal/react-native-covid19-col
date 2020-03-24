@@ -54,11 +54,15 @@ class HowItSpreadsCard extends React.PureComponent {
   }
 }
 
+HowItSpreadsCard.defaultProps = {
+  children: [],
+};
+
 HowItSpreadsCard.propTypes = {
-  children: PropTypes.instanceOf(Object).isRequired,
+  children: PropTypes.instanceOf(Object),
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  backgroundImage: PropTypes.instanceOf(Object).isRequired,
+  backgroundImage: PropTypes.number.isRequired,
 };
 
 export default HowItSpreadsCard;

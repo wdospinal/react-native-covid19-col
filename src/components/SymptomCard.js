@@ -32,7 +32,7 @@ class SymptomCard extends React.PureComponent {
   }
 }
 SymptomCard.propTypes = {
-  source: PropTypes.instanceOf(Object).isRequired,
+  source: PropTypes.number.isRequired,
   symptom: PropTypes.string.isRequired,
 };
 

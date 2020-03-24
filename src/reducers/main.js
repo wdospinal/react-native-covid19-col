@@ -1,4 +1,4 @@
-import { CASES_UPDATE_FETCH_SUCCEEDED, DAILY_UPDATE_FETCH_SUCCEEDED } from '../actions/main';
+import { CASES_UPDATE_FETCH_SUCCEEDED, DAILY_UPDATE_FETCH_SUCCEEDED } from '../actions';
 
 const initialState = {
   cases: {

@@ -6,7 +6,7 @@ import {
   DAILY_UPDATE_FETCH_FAILED,
   GET_CASES,
   GET_DAILY,
-} from '../actions/main';
+} from '../actions';
 
 import { baseUrl } from '../config';
 

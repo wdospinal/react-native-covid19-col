@@ -48,7 +48,7 @@ class Advice extends React.PureComponent {
 }
 
 Advice.propTypes = {
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Advice;

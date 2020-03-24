@@ -28,8 +28,8 @@ class WhatToDoCard extends React.PureComponent {
 }
 
 WhatToDoCard.propTypes = {
-  image: PropTypes.instanceOf(Object).isRequired,
-  points: PropTypes.func.isRequired,
+  image: PropTypes.number.isRequired,
+  points: PropTypes.instanceOf(Array).isRequired,
   title: PropTypes.string.isRequired,
 };
 

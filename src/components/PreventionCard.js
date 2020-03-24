@@ -55,7 +55,7 @@ class PreventionCard extends React.PureComponent {
 
 PreventionCard.propTypes = {
   children: PropTypes.instanceOf(Object).isRequired,
-  backgroundImage: PropTypes.instanceOf(Object).isRequired,
+  backgroundImage: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
 };
 

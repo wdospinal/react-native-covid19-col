@@ -2,8 +2,10 @@ import React from 'react';
 import {
   View, Dimensions,
 } from 'react-native';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { SET_ACTIVE_SLIDE } from '../actions';
 import { Container, BackBtn } from '../components';
 import imgSymptoms1 from '../res/symptoms-1.png';
 import imgSymptoms4 from '../res/symptoms-4.png';
@@ -30,9 +32,7 @@ const styles = {
 // TODO: ADD reducer to manage activeSlide
 class WhatToDo extends React.PureComponent {
   render() {
-    const { navigation } = this.props;
-
-    // const [activeSlide, setActiveSlide] = useState(0);
+    const { navigation, activeSlide, setActiveSlide } = this.props;
 
     const data = [
       {
@@ -118,7 +118,7 @@ class WhatToDo extends React.PureComponent {
       return (
         <Pagination
           dotsLength={data.length}
-          activeDotIndex
+          activeDotIndex={activeSlide}
           containerStyle={{ backgroundColor: 'transparent' }}
           dotStyle={styles.pagination}
           inactiveDotStyle={{}}
@@ -128,12 +128,13 @@ class WhatToDo extends React.PureComponent {
       );
     }
 
-    function renderItem({ item }) {
+    function renderItem({ item, index }) {
       return (
         <WhatToDoCard
           image={item.image}
           title={item.title}
           points={item.points}
+          key={index}
         >
           {item.child}
         </WhatToDoCard>
@@ -156,7 +157,7 @@ class WhatToDo extends React.PureComponent {
             autoplay
             lockScrollWhileSnapping
             autoplayInterval={7000}
-            // onSnapToItem={(index) => setActiveSlide(index)}
+            onSnapToItem={(index) => setActiveSlide(index)}
           />
         </View>
       </Container>
@@ -164,8 +165,23 @@ class WhatToDo extends React.PureComponent {
   }
 }
 
-WhatToDo.propTypes = {
-  navigation: PropTypes.instanceOf(Object).isRequired,
+WhatToDo.defaultProps = {
+  activeSlide: 0,
+  setActiveSlide: () => {},
 };
 
-export default WhatToDo;
+WhatToDo.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired,
+  setActiveSlide: PropTypes.func,
+  activeSlide: PropTypes.number,
+};
+
+const mapStateToProps = (state) => ({
+  activeSlide: state.whatToDo.activeSlide,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveSlide: (index) => dispatch({ type: SET_ACTIVE_SLIDE, index }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WhatToDo);
