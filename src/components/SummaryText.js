@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AnimateNumber from 'react-native-animate-number';
 import { textColor, backgroundColor } from '../config';
 
 const styles = {
@@ -45,7 +46,11 @@ class SummaryText extends React.PureComponent {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={onPress}>
-          <Text style={styles.text}>{text}</Text>
+          <AnimateNumber
+            style={styles.text}
+            value={text}
+            formatter={(val) => parseFloat(val).toFixed(0)}
+          />
           <Text style={[styles.subText, { color: subTextColor }]}>{subText}</Text>
         </TouchableOpacity>
       </View>

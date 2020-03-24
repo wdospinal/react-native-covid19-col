@@ -56,7 +56,8 @@ class CasesCard extends React.PureComponent {
     }
     return (
       <TouchableOpacity onPress={onPress}>
-        <View style={styles.container}>
+      <View
+        style={[styles.container, {backgroundColor: activeTheme.primaryColor}]}>
           {/* icon change based on case type */}
           <Icon
             containerStyle={{ flex: 1 }}
@@ -72,7 +73,6 @@ class CasesCard extends React.PureComponent {
           </View>
         </View>
       </TouchableOpacity>
-
     );
   }
 }

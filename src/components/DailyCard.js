@@ -25,14 +25,27 @@ class DailyCard extends React.PureComponent {
 
     return (
       <View style={styles.container}>
-        <Icon
-          containerStyle={{ flex: 1 }}
-          name="timelapse"
-          type="material"
-          color={textColor.alternate}
-        />
+        <View style={{ flex: 1 }}>
+          <Icon
+            containerStyle={{ marginBottom: 0, padding: 0, margin: 0 }}
+            name="timelapse"
+            type="material"
+            color={textColor.alternate}
+          />
+          <View
+            style={{
+              backgroundColor: 'transparent',
+              width: '50%',
+              height: 50,
+              borderRightWidth: 0.8,
+              borderRightColor: textColor.alternate,
+            }}
+          />
+        </View>
         <View style={{ flex: 6 }}>
-          <Text style={{ color: 'white' }}>{(new Date(caso.reportDateString)).toDateString()}</Text>
+          <Text style={{ color: textColor.normal }}>
+            {new Date(caso.reportDateString).toDateString()}
+          </Text>
           <View style={{ flexDirection: 'row' }}>
             <CaseStateText
               state="Confirmed"
@@ -46,7 +59,11 @@ class DailyCard extends React.PureComponent {
             />
           </View>
           <Text style={styles.descriptionText}>
-            {`Total ${caso.mainlandChina ? caso.mainlandChina : 0} cases in China and ${caso.otherLocation ? caso.otherLocation : 0} in other locations`}
+            {`Total ${
+              caso.mainlandChina ? caso.mainlandChina : 0
+            } casos in China and ${
+              caso.otherLocations ? caso.otherLocations : 0
+            } in other locations`}
           </Text>
         </View>
       </View>
