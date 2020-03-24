@@ -4,20 +4,36 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Container } from '../components';
 import { textColor, primaryColor } from '../config';
 
-export default function Settings() {
-  const styles = {
-    text: {
-      color: textColor.normal,
-      marginBottom: 5,
-      fontSize: 16,
-    },
-    settingsContainer: [{
-      fontSize: 30,
-      marginBottom: 30,
-    }, { color: textColor.alternate }],
-    options: { color: textColor.secondary },
-  };
+const headerText = {
+  fontSize: 30,
+  marginBottom: 30,
+};
 
+const styles = {
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    marginVertical: 5,
+    borderRadius: 5,
+    elevation: 1,
+    padding: 20,
+  },
+  text: {
+    color: textColor.normal,
+    marginBottom: 5,
+    fontSize: 16,
+  },
+  headerText,
+  caseTypeText: {
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  settingsContainer: [headerText, { color: textColor.alternate }],
+  options: { color: textColor.secondary },
+};
+
+export default function Settings() {
   return (
     <Container>
       <View style={{ padding: 20 }}>
