@@ -1,5 +1,6 @@
-export const backgroundColor = '#322444';
-export const primaryColor = '#7D5AAA';
+export const backgroundColor = '#171717';
+export const primaryColor = '#2B303A';
+export const tabBarColor = '#2C2C2C';
 
 export const textColor = {
   confirmed: '#F2B900',
