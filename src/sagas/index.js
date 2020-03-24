@@ -6,6 +6,12 @@ import {
   DAILY_UPDATE_FETCH_FAILED,
   GET_CASES,
   GET_DAILY,
+  SET_FORCE_LIST_RERENDER,
+  GET_EACH_CASE,
+  SET_DATA,
+  UPDATE_SEARCH,
+  CASE_FETCH_FAILED,
+  SET_FILTERED_DATA,
 } from '../actions';
 
 import { baseUrl } from '../config';
@@ -52,6 +58,41 @@ function* fetchCases() {
   }
 }
 
+function* fetchEachCase(action) {
+  try {
+    const caseType = action.caso;
+    const response = yield fetch(`${baseUrl}/${caseType.toLowerCase()}`);
+    if (response.status === 200) {
+      const data = yield response.json();
+      yield all([
+        put({ type: SET_DATA, data }),
+        put({ type: SET_FORCE_LIST_RERENDER }),
+      ]);
+    } else {
+      yield put({ type: CASE_FETCH_FAILED, error: response.status });
+    }
+  } catch (e) {
+    yield put({ type: CASE_FETCH_FAILED, message: e.message });
+  }
+}
+
+function* filterData(action) {
+  const { search, data } = action.payload;
+  let newData;
+  if (search.length > 0) {
+    newData = data.filter((item) => {
+      if (item) {
+        // return item.provinceState?.includes(search) || item.countryRegion?.includes(search);
+        return item;
+      }
+      return item;
+    });
+  } else {
+    console.log('new Data');
+    newData = data;
+  }
+  yield put({ type: SET_FILTERED_DATA, newData }); // setFilteredData(newData);
+}
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -62,10 +103,18 @@ function* watchFetchCases() {
 function* watchFetchDaily() {
   yield takeEvery(GET_CASES, fetchDaily);
 }
+function* watchFetchEachCase() {
+  yield takeEvery(GET_EACH_CASE, fetchEachCase);
+}
+function* watchFilterData() {
+  yield takeEvery(UPDATE_SEARCH, filterData);
+}
 
 export default function* rootSaga() {
   yield all([
     watchFetchCases(),
     watchFetchDaily(),
+    watchFetchEachCase(),
+    watchFilterData(),
   ]);
 }

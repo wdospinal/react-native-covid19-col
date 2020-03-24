@@ -1,10 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { View, FlatList, KeyboardAvoidingView } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { Container, CasesCard } from '../components';
-import { textColor, baseUrl } from '../config';
+import { textColor } from '../config';
+import {
+  SET_SEARCH,
+  SET_FORCE_LIST_RERENDER,
+  SET_CURRENT_LATITUDE,
+  SET_CURRENT_LONGITUDE,
+  GET_EACH_CASE,
+  UPDATE_SEARCH,
+} from '../actions';
 
 const styles = {
   container: {
@@ -39,45 +48,34 @@ const styles = {
 };
 
 class Cases extends React.PureComponent {
-  render() {
-    const mapView = useRef(null);
-    const [search, setSearch] = useState('');
-    const [data, setData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [forceListRerender, setForceListRerender] = useState(false);
-    const [currentLatitude, setCurrentLatitude] = useState(35.8617);
-    const [currentLongitude, setCurrentLongitude] = useState(104.1954);
+  componentDidMount() {
+    const { getCases, route } = this.props;
+    const caseType = route.params.case;
+    getCases(caseType);
+  }
 
-    const { route, navigation } = this.props;
+  render() {
+    const {
+      route,
+      navigation,
+      search,
+      setSearch,
+      data,
+      forceListRerender,
+      setForceListRerender,
+      filteredData,
+      setCurrentLatitude,
+      currentLatitude,
+      setCurrentLongitude,
+      currentLongitude,
+      updateFilteredData,
+    } = this.props;
 
     function updateSearch(searching) {
       setSearch(searching);
+      const payload = { search, data };
+      updateFilteredData(payload);
     }
-
-    useEffect(() => {
-      console.log(currentLatitude);
-      console.log(currentLongitude);
-    }, [currentLatitude, currentLongitude]);
-
-    // filter data
-    useEffect(() => {
-      let newData;
-
-      if (search.length > 0) {
-        newData = data.filter((item) => {
-          if (item) {
-            // return item.provinceState?.includes(search) || item.countryRegion?.includes(search);
-            return item;
-          }
-          return item;
-        });
-      } else {
-        console.log('new Data');
-        newData = data;
-      }
-
-      setFilteredData(newData);
-    }, [search, data]);
 
     useEffect(() => {
       setForceListRerender(!forceListRerender);
@@ -87,7 +85,7 @@ class Cases extends React.PureComponent {
       setCurrentLatitude(latitude);
       setCurrentLongitude(longitude);
 
-      mapView.current.animateToRegion({
+      this.mapView.current.animateToRegion({
         latitude: currentLatitude,
         longitude: currentLongitude,
         latitudeDelta: 0.0922,
@@ -105,22 +103,21 @@ class Cases extends React.PureComponent {
       );
     }
 
-    async function getCases() {
-      const caseType = route.params.case;
-      const response = await fetch(`${baseUrl}/${caseType.toLowerCase()}`);
-
-      if (response.status === 200) {
-        const result = await response.json();
-
-        setData(result, () => {
-          setForceListRerender(!forceListRerender);
-        });
-      }
+    let markerColor;
+    switch (route.params.case) {
+      case 'Confirmed':
+        markerColor = textColor.confirmed;
+        break;
+      case 'Recovered':
+        markerColor = textColor.recovered;
+        break;
+      case 'Deaths':
+        markerColor = textColor.deaths;
+        break;
+      default:
+        markerColor = textColor.deaths;
+        break;
     }
-
-    useEffect(() => {
-      getCases();
-    }, []);
 
     return (
       <>
@@ -133,24 +130,18 @@ class Cases extends React.PureComponent {
             />
           )}
           containerStyle={{
-            position: 'absolute',
-            top: 20,
-            left: 20,
-            zIndex: 100,
+            position: 'absolute', top: 20, left: 20, zIndex: 100,
           }}
-          buttonStyle={{ backgroundColor: '#00000070', padding: 12 }}
+          buttonStyle={{
+            backgroundColor: '#00000070',
+            padding: 12,
+          }}
           onPress={() => navigation.goBack()}
         />
         <View style={styles.container}>
           <MapView
-            ref={mapView}
+            ref={this.mapView}
             style={styles.map}
-            // initialRegion={{
-            // latitude: 35.8617,
-            // longitude: 104.1954,
-            // latitudeDelta: 0.0922,
-            // longitudeDelta: 0.0421,
-            // }}
             initialCamera={{
               center: {
                 latitude: 35.8617,
@@ -160,7 +151,17 @@ class Cases extends React.PureComponent {
               heading: 0,
               zoom: 1,
             }}
-          />
+          >
+            {data.map((item) => (
+              <Marker
+                coordinate={{
+                  longitude: item.long,
+                  latitude: item.lat,
+                }}
+                pinColor={markerColor}
+              />
+            ))}
+          </MapView>
           {/* <View style={{}}> */}
           <SearchBar
             placeholder="Type City or province region"
@@ -193,6 +194,51 @@ class Cases extends React.PureComponent {
 Cases.propTypes = {
   route: PropTypes.instanceOf(Object).isRequired,
   navigation: PropTypes.instanceOf(Object).isRequired,
+  setSearch: PropTypes.func,
+  search: PropTypes.string,
+  data: PropTypes.instanceOf(Array),
+  filteredData: PropTypes.instanceOf(Array),
+  setForceListRerender: PropTypes.func,
+  forceListRerender: PropTypes.bool,
+  setCurrentLatitude: PropTypes.func,
+  currentLatitude: PropTypes.number,
+  setCurrentLongitude: PropTypes.func,
+  currentLongitude: PropTypes.number,
+  getCases: PropTypes.func,
+  updateFilteredData: PropTypes.func,
 };
 
-export default Cases;
+Cases.defaultProps = {
+  setSearch: () => {},
+  search: '',
+  data: [],
+  filteredData: [],
+  setForceListRerender: () => {},
+  forceListRerender: false,
+  setCurrentLatitude: () => {},
+  currentLatitude: 0,
+  setCurrentLongitude: () => {},
+  currentLongitude: 0,
+  getCases: () => {},
+  updateFilteredData: () => {},
+};
+
+const mapStateToProps = (state) => ({
+  search: state.cases.search,
+  data: state.cases.data,
+  filteredData: state.cases.filteredData,
+  forceListRerender: state.cases.forceListRerender,
+  currentLatitude: state.cases.currentLatitude,
+  currentLongitude: state.cases.currentLongitude,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCases: (caso) => dispatch({ type: GET_EACH_CASE, caso }),
+  setSearch: (search) => dispatch({ type: SET_SEARCH, search }),
+  setForceListRerender: () => dispatch({ type: SET_FORCE_LIST_RERENDER }),
+  setCurrentLatitude: (lat) => dispatch({ type: SET_CURRENT_LATITUDE, lat }),
+  setCurrentLongitude: (long) => dispatch({ type: SET_CURRENT_LONGITUDE, long }),
+  updateFilteredData: (payload) => dispatch({ type: UPDATE_SEARCH, payload }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cases);
