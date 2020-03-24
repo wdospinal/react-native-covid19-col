@@ -1,12 +1,22 @@
-import { CASES_UPDATE_FETCH_SUCCEEDED, DAILY_UPDATE_FETCH_SUCCEEDED } from '../actions';
+import {
+  CASES_UPDATE_FETCH_SUCCEEDED,
+  DAILY_UPDATE_FETCH_SUCCEEDED,
+  FETCH_COLOMBIA_SUCCEEDED,
+} from '../actions';
 
 const initialState = {
   cases: {
-    Confirmed: 0,
-    Recovered: 0,
-    Deaths: 0,
+    confirmed: 0,
+    recovered: 0,
+    deaths: 0,
   },
   dailyUpdate: [],
+  colombia: {
+    colLastUpdated: '',
+    colConfirmed: 0,
+    colDeaths: 0,
+    colRecovered: 0,
+  },
 };
 
 export default function (state = initialState, action) {
@@ -14,12 +24,17 @@ export default function (state = initialState, action) {
     case CASES_UPDATE_FETCH_SUCCEEDED:
       return {
         ...state,
-        cases: action.result,
+        cases: action.cases,
       };
     case DAILY_UPDATE_FETCH_SUCCEEDED:
       return {
         ...state,
         dailyUpdate: action.result,
+      };
+    case FETCH_COLOMBIA_SUCCEEDED:
+      return {
+        ...state,
+        colombia: action.colombia,
       };
     default:
       return state;

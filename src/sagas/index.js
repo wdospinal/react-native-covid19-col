@@ -12,6 +12,9 @@ import {
   UPDATE_SEARCH,
   CASE_FETCH_FAILED,
   SET_FILTERED_DATA,
+  FETCH_COLOMBIA_SUCCEEDED,
+  FETCH_COLOMBIA_FAILED,
+  GET_COLOMBIA,
 } from '../actions';
 
 import { baseUrl } from '../config';
@@ -42,16 +45,37 @@ function* fetchCases() {
     const response = yield fetch(baseUrl);
     if (response.status === 200) {
       const result = yield response.json();
-      yield put({ type: CASES_UPDATE_FETCH_SUCCEEDED, result });
+      const cases = {
+        confirmed: result.confirmed.value,
+        recovered: result.recovered.value,
+        deaths: result.deaths.value,
+      };
+      yield put({ type: CASES_UPDATE_FETCH_SUCCEEDED, cases });
       /*
-      setCases({
-        Confirmed: result.confirmed.value,
-        Recovered: result.recovered.value,
-        Deaths: result.deaths.value,
-      });
+      setCases();
       */
     } else {
       yield put({ type: CASES_UPDATE_FETCH_FAILED, error: response.status });
+    }
+  } catch (e) {
+    yield put({ type: CASES_UPDATE_FETCH_FAILED, message: e.message });
+  }
+}
+
+function* fetchColombia() {
+  try {
+    const response = yield fetch(`${baseUrl}/countries/Colombia`);
+    if (response.status === 200) {
+      const result = yield response.json();
+      const colombia = {
+        colLastUpdated: result.lastUpdate,
+        colConfirmed: result.confirmed.value,
+        colDeaths: result.deaths.value,
+        colRecovered: result.recovered.value,
+      };
+      yield put({ type: FETCH_COLOMBIA_SUCCEEDED, colombia });
+    } else {
+      yield put({ type: FETCH_COLOMBIA_FAILED, error: response.status });
     }
   } catch (e) {
     yield put({ type: CASES_UPDATE_FETCH_FAILED, message: e.message });
@@ -109,6 +133,9 @@ function* watchFetchEachCase() {
 function* watchFilterData() {
   yield takeEvery(UPDATE_SEARCH, filterData);
 }
+function* watchFetchColombia() {
+  yield takeEvery(GET_COLOMBIA, fetchColombia);
+}
 
 export default function* rootSaga() {
   yield all([
@@ -116,5 +143,6 @@ export default function* rootSaga() {
     watchFetchDaily(),
     watchFetchEachCase(),
     watchFilterData(),
+    watchFetchColombia(),
   ]);
 }

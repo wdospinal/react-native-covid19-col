@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, FlatList, KeyboardAvoidingView } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -62,7 +62,6 @@ class Cases extends React.PureComponent {
       setSearch,
       data,
       forceListRerender,
-      setForceListRerender,
       filteredData,
       setCurrentLatitude,
       currentLatitude,
@@ -76,10 +75,6 @@ class Cases extends React.PureComponent {
       const payload = { search, data };
       updateFilteredData(payload);
     }
-
-    useEffect(() => {
-      setForceListRerender(!forceListRerender);
-    }, [filteredData]);
 
     function setMapLocation(latitude, longitude) {
       setCurrentLatitude(latitude);
@@ -198,7 +193,6 @@ Cases.propTypes = {
   search: PropTypes.string,
   data: PropTypes.instanceOf(Array),
   filteredData: PropTypes.instanceOf(Array),
-  setForceListRerender: PropTypes.func,
   forceListRerender: PropTypes.bool,
   setCurrentLatitude: PropTypes.func,
   currentLatitude: PropTypes.number,
@@ -213,7 +207,6 @@ Cases.defaultProps = {
   search: '',
   data: [],
   filteredData: [],
-  setForceListRerender: () => {},
   forceListRerender: false,
   setCurrentLatitude: () => {},
   currentLatitude: 0,

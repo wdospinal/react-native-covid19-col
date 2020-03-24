@@ -28,7 +28,6 @@ class SummaryText extends React.PureComponent {
   render() {
     let subTextColor;
     const { subText, onPress, text } = this.props;
-
     switch (subText) {
       case 'Confirmed':
         subTextColor = textColor.confirmed;

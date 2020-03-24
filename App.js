@@ -7,8 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import {
-
-  // Main,
+  Main,
   Prevention,
   Symptoms,
   HowItSpreads,
@@ -50,8 +49,9 @@ const tabBarOptions = {
 function StatsStack() {
   return (
     <Stack.Navigator initialRouteName="Main" headerMode="none">
-      <Stack.Screen name="Main" component={Blank} />
+      <Stack.Screen name="Main" component={Main} />
       <Stack.Screen name="Cases" component={Cases} />
+      <Stack.Screen name="Blank" component={Blank} />
     </Stack.Navigator>
   );
 }

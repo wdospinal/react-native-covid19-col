@@ -86,7 +86,7 @@ class CountryCard extends React.PureComponent {
 }
 
 CountryCard.propTypes = {
-  lastUpdated: PropTypes.instanceOf(Object).isRequired,
+  lastUpdated: PropTypes.number.isRequired,
   country: PropTypes.string.isRequired,
   confirmed: PropTypes.number.isRequired,
   deaths: PropTypes.number.isRequired,
