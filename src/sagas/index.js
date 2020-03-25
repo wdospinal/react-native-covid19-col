@@ -27,11 +27,6 @@ function* fetchDaily() {
     if (response.status === 200) {
       const result = yield response.json();
       yield put({ type: DAILY_UPDATE_FETCH_SUCCEEDED, result });
-      /*
-      setDailyUpdate(result, () => {
-        setForceListRerender(!forceListRerender);
-      });
-      */
     } else {
       yield put({ type: DAILY_UPDATE_FETCH_FAILED, error: response.status });
     }
@@ -51,9 +46,6 @@ function* fetchCases() {
         deaths: result.deaths.value,
       };
       yield put({ type: CASES_UPDATE_FETCH_SUCCEEDED, cases });
-      /*
-      setCases();
-      */
     } else {
       yield put({ type: CASES_UPDATE_FETCH_FAILED, error: response.status });
     }
@@ -105,11 +97,11 @@ function* filterData(action) {
   let newData;
   if (search.length > 0) {
     newData = data.filter((item) => {
-      if (item) {
-        // return item.provinceState?.includes(search) || item.countryRegion?.includes(search);
-        return item;
-      }
-      return item;
+      const { provinceState, countryRegion } = item;
+      return item && (
+        (provinceState && provinceState.includes(search))
+         || (countryRegion && countryRegion.includes(search))
+      );
     });
   } else {
     console.log('new Data');

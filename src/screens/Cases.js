@@ -13,6 +13,7 @@ import {
   SET_CURRENT_LONGITUDE,
   GET_EACH_CASE,
   UPDATE_SEARCH,
+  SET_MAP_VIEW,
 } from '../actions';
 
 const styles = {
@@ -68,6 +69,8 @@ class Cases extends React.PureComponent {
       setCurrentLongitude,
       currentLongitude,
       updateFilteredData,
+      mapView,
+      setMapView,
     } = this.props;
 
     function updateSearch(searching) {
@@ -79,8 +82,8 @@ class Cases extends React.PureComponent {
     function setMapLocation(latitude, longitude) {
       setCurrentLatitude(latitude);
       setCurrentLongitude(longitude);
-
-      this.mapView.current.animateToRegion({
+      console.log(currentLatitude)
+      mapView.animateToRegion({
         latitude: currentLatitude,
         longitude: currentLongitude,
         latitudeDelta: 0.0922,
@@ -135,20 +138,22 @@ class Cases extends React.PureComponent {
         />
         <View style={styles.container}>
           <MapView
-            ref={this.mapView}
+            ref={setMapView}
             style={styles.map}
             initialCamera={{
               center: {
-                latitude: 35.8617,
-                longitude: 104.1954,
+                latitude: 6.2518400,
+                longitude: -75.5635900,
               },
+              altitude: 1,
               pitch: 1,
               heading: 0,
-              zoom: 1,
+              zoom: 5,
             }}
           >
             {data.map((item) => (
               <Marker
+                key={item.index}
                 coordinate={{
                   longitude: item.long,
                   latitude: item.lat,
@@ -200,6 +205,8 @@ Cases.propTypes = {
   currentLongitude: PropTypes.number,
   getCases: PropTypes.func,
   updateFilteredData: PropTypes.func,
+  mapView: PropTypes.instanceOf(Object),
+  setMapView: PropTypes.func,
 };
 
 Cases.defaultProps = {
@@ -209,11 +216,13 @@ Cases.defaultProps = {
   filteredData: [],
   forceListRerender: false,
   setCurrentLatitude: () => {},
-  currentLatitude: 0,
+  currentLatitude: 6.2518400,
+  currentLongitude: -75.5635900,
   setCurrentLongitude: () => {},
-  currentLongitude: 0,
   getCases: () => {},
   updateFilteredData: () => {},
+  mapView: {},
+  setMapView: () => {},
 };
 
 const mapStateToProps = (state) => ({
@@ -223,6 +232,7 @@ const mapStateToProps = (state) => ({
   forceListRerender: state.cases.forceListRerender,
   currentLatitude: state.cases.currentLatitude,
   currentLongitude: state.cases.currentLongitude,
+  mapView: state.cases.mapView,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -232,6 +242,7 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentLatitude: (lat) => dispatch({ type: SET_CURRENT_LATITUDE, lat }),
   setCurrentLongitude: (long) => dispatch({ type: SET_CURRENT_LONGITUDE, long }),
   updateFilteredData: (payload) => dispatch({ type: UPDATE_SEARCH, payload }),
+  setMapView: (mapView) => dispatch({ type: SET_MAP_VIEW, mapView }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cases);
