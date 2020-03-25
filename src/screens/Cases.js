@@ -8,9 +8,6 @@ import { Container, CasesCard } from '../components';
 import { textColor } from '../config';
 import {
   SET_SEARCH,
-  SET_FORCE_LIST_RERENDER,
-  SET_CURRENT_LATITUDE,
-  SET_CURRENT_LONGITUDE,
   GET_EACH_CASE,
   UPDATE_SEARCH,
   SET_MAP_VIEW,
@@ -64,10 +61,6 @@ class Cases extends React.PureComponent {
       data,
       forceListRerender,
       filteredData,
-      setCurrentLatitude,
-      currentLatitude,
-      setCurrentLongitude,
-      currentLongitude,
       updateFilteredData,
       mapView,
       setMapView,
@@ -79,13 +72,10 @@ class Cases extends React.PureComponent {
       updateFilteredData(payload);
     }
 
-    function setMapLocation(latitude, longitude) {
-      setCurrentLatitude(latitude);
-      setCurrentLongitude(longitude);
-      console.log(currentLatitude)
+    function setMapLocation(lat, long) {
       mapView.animateToRegion({
-        latitude: currentLatitude,
-        longitude: currentLongitude,
+        latitude: lat,
+        longitude: long,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
@@ -199,10 +189,6 @@ Cases.propTypes = {
   data: PropTypes.instanceOf(Array),
   filteredData: PropTypes.instanceOf(Array),
   forceListRerender: PropTypes.bool,
-  setCurrentLatitude: PropTypes.func,
-  currentLatitude: PropTypes.number,
-  setCurrentLongitude: PropTypes.func,
-  currentLongitude: PropTypes.number,
   getCases: PropTypes.func,
   updateFilteredData: PropTypes.func,
   mapView: PropTypes.instanceOf(Object),
@@ -215,10 +201,6 @@ Cases.defaultProps = {
   data: [],
   filteredData: [],
   forceListRerender: false,
-  setCurrentLatitude: () => {},
-  currentLatitude: 6.2518400,
-  currentLongitude: -75.5635900,
-  setCurrentLongitude: () => {},
   getCases: () => {},
   updateFilteredData: () => {},
   mapView: {},
@@ -238,9 +220,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCases: (caso) => dispatch({ type: GET_EACH_CASE, caso }),
   setSearch: (search) => dispatch({ type: SET_SEARCH, search }),
-  setForceListRerender: () => dispatch({ type: SET_FORCE_LIST_RERENDER }),
-  setCurrentLatitude: (lat) => dispatch({ type: SET_CURRENT_LATITUDE, lat }),
-  setCurrentLongitude: (long) => dispatch({ type: SET_CURRENT_LONGITUDE, long }),
   updateFilteredData: (payload) => dispatch({ type: UPDATE_SEARCH, payload }),
   setMapView: (mapView) => dispatch({ type: SET_MAP_VIEW, mapView }),
 });

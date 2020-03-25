@@ -3,8 +3,6 @@ import {
   SET_DATA,
   SET_FILTERED_DATA,
   SET_FORCE_LIST_RERENDER,
-  SET_CURRENT_LATITUDE,
-  SET_CURRENT_LONGITUDE,
   CASE_FETCH_FAILED,
   SET_MAP_VIEW,
 } from '../actions';
@@ -19,8 +17,6 @@ const initialState = {
   data: [],
   filteredData: [],
   forceListRerender: false,
-  currentLatitude: 6.2518400,
-  currentLongitude: -75.5635900,
 };
 
 export default function (state = initialState, action) {
@@ -44,16 +40,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         forceListRerender: !state.forceListRerender,
-      };
-    case SET_CURRENT_LATITUDE:
-      return {
-        ...state,
-        currentLatitude: action.lat,
-      };
-    case SET_CURRENT_LONGITUDE:
-      return {
-        ...state,
-        currentLatitude: action.long,
       };
     case CASE_FETCH_FAILED:
       console.log('CASE_FETCH_FAILED');

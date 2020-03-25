@@ -82,6 +82,7 @@ function* fetchEachCase(action) {
       const data = yield response.json();
       yield all([
         put({ type: SET_DATA, data }),
+        put({ type: SET_FILTERED_DATA, newData: data }),
         put({ type: SET_FORCE_LIST_RERENDER }),
       ]);
     } else {
