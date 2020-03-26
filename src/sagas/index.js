@@ -129,7 +129,7 @@ function* watchFilterData() {
 function* watchFetchColombia() {
   yield takeEvery(GET_COLOMBIA, fetchColombia);
 }
-
+// TODO: setI18nConfig
 export default function* rootSaga() {
   yield all([
     watchFetchCases(),

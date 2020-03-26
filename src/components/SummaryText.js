@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AnimateNumber from 'react-native-animate-number';
 import { textColor, backgroundColor } from '../config';
+import i18n from '../translation';
 
 const styles = {
   text: {
@@ -50,7 +51,7 @@ class SummaryText extends React.PureComponent {
             value={text}
             formatter={(val) => parseFloat(val).toFixed(0)}
           />
-          <Text style={[styles.subText, { color: subTextColor }]}>{subText}</Text>
+          <Text style={[styles.subText, { color: subTextColor }]}>{i18n.t(subText)}</Text>
         </TouchableOpacity>
       </View>
     );

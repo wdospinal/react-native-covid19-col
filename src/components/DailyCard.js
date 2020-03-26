@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import CaseStateText from './CaseStateText';
 import { primaryColor, textColor } from '../config';
+import i18n from '../translation';
 
 const styles = {
   container: {
@@ -23,6 +24,11 @@ class DailyCard extends React.PureComponent {
   render() {
     const { case: caso } = this.props;
 
+    const options = {
+      weekday: 'long', year: 'long', month: 'long', day: 'numeric',
+    };
+    console.log(i18n.locale)
+    console.log(new Date(caso.reportDate).toLocaleDateString(i18n.locale, options))
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>

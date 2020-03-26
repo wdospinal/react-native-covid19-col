@@ -19,7 +19,7 @@ import {
 } from './src/screens';
 import { textColor, tabBarColor } from './src/config';
 import store from './src/store';
-
+import i18n from './src/translation';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -77,11 +77,11 @@ export default function App() {
             tabBarIcon: ({ focused, size }) => {
               const iconColor = focused ? textColor.alternate : 'gray';
 
-              if (route.name === 'Stats') {
+              if (route.name === i18n.t('stats')) {
                 return <Entypo name="line-graph" color={iconColor} size={size} />;
-              } if (route.name === 'Advice') {
+              } if (route.name === i18n.t('advice')) {
                 return <SimpleLineIcon name="notebook" color={iconColor} size={size} />;
-              } if (route.name === 'Settings') {
+              } if (route.name === i18n.t('settings')) {
                 return <SimpleLineIcon name="settings" color={iconColor} size={size} />;
               }
               return <SimpleLineIcon name="empty" color={iconColor} size={size} />;
@@ -92,9 +92,9 @@ export default function App() {
           initialRouteName="Stats"
           headerMode="none"
         >
-          <Tab.Screen name="Stats" component={StatsStack} />
-          <Tab.Screen name="Advice" component={AdviceStack} />
-          <Tab.Screen name="Settings" component={Settings} />
+          <Tab.Screen name={i18n.t('stats')} component={StatsStack} />
+          <Tab.Screen name={i18n.t('advice')} component={AdviceStack} />
+          <Tab.Screen name={i18n.t('settings')} component={Settings} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
