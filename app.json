@@ -1,9 +1,11 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "my-new-project",
+    "name": "ColCovidMonitor",
+    "slug": "react-native-covid19-col",
     "privacy": "public",
     "sdkVersion": "36.0.0",
+    "backgroundColor": "#171717",
+    "owner": "wdospinal",
     "platforms": [
       "ios",
       "android",
@@ -15,7 +17,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#171717"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +26,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zanacode.colcovidmonitor",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.zanacode.colcovidmonitor",
+      "versionCode": 1,
+      "backgroundColor": "#171717",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
     }
   }
 }
