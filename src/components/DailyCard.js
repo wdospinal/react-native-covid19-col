@@ -23,12 +23,6 @@ const styles = {
 class DailyCard extends React.PureComponent {
   render() {
     const { case: caso } = this.props;
-
-    const options = {
-      weekday: 'long', year: 'long', month: 'long', day: 'numeric',
-    };
-    console.log(i18n.locale)
-    console.log(new Date(caso.reportDate).toLocaleDateString(i18n.locale, options))
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -50,7 +44,7 @@ class DailyCard extends React.PureComponent {
         </View>
         <View style={{ flex: 6 }}>
           <Text style={{ color: textColor.normal }}>
-            {new Date(caso.reportDateString).toDateString()}
+            {new Date(caso.reportDate).toDateString()}
           </Text>
           <View style={{ flexDirection: 'row' }}>
             <CaseStateText
@@ -65,11 +59,11 @@ class DailyCard extends React.PureComponent {
             />
           </View>
           <Text style={styles.descriptionText}>
-            {`Total ${
+            {`${i18n.t('total')} ${
               caso.mainlandChina ? caso.mainlandChina : 0
-            } casos in China and ${
+            } ${i18n.t('casesInChina')} ${
               caso.otherLocations ? caso.otherLocations : 0
-            } in other locations`}
+            } ${i18n.t('inOtherLocations')}`}
           </Text>
         </View>
       </View>

@@ -12,6 +12,7 @@ import {
   UPDATE_SEARCH,
   SET_MAP_VIEW,
 } from '../actions';
+import i18n from '../translation';
 
 const styles = {
   container: {
@@ -154,7 +155,7 @@ class Cases extends React.PureComponent {
           </MapView>
           {/* <View style={{}}> */}
           <SearchBar
-            placeholder="Type City or province region"
+            placeholder={i18n.t('typeCity')}
             onChangeText={updateSearch}
             value={search}
             containerStyle={styles.searchContainer}

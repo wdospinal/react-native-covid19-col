@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import i18n from '../translation';
 import { textColor } from '../config';
 
 const styles = {
@@ -47,7 +48,7 @@ class CaseStateText extends React.PureComponent {
             { color },
           ]}
         >
-          {`${state}: ${value}`}
+          {`${i18n.t(state)}: ${value}`}
         </Text>
       </View>
     );

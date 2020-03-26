@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Container } from '../components';
 import { textColor, primaryColor } from '../config';
+import i18n from '../translation';
 
 const headerText = {
   fontSize: 30,
@@ -47,8 +48,8 @@ export default function Settings() {
               size={40}
             />
             <View style={{ flex: 5, padding: 10 }}>
-              <Text style={styles.text}>Dark Mode</Text>
-              <Text style={styles.options}>Toggle between dark and light mode</Text>
+              <Text style={styles.text}>{i18n.t('darkMode')}</Text>
+              <Text style={styles.options}>{i18n.t('toogleDarkMode')}</Text>
             </View>
             <MaterialCommunityIcons
               name="toggle-switch"

@@ -9,6 +9,7 @@ import backImg3 from '../res/background-3.jpg';
 import {
   PreventionCard, Container, BackBtn, Bulletin,
 } from '../components';
+import i18n from '../translation';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -18,22 +19,22 @@ class Prevention extends React.PureComponent {
     const data = [
       {
         backgroundImage: backImg1,
-        title: 'Clean your hands often',
+        title: i18n.t('prevention1'),
         child: (
           <View>
-            <Bulletin title="Wash your hands often with soap and water for at least 20 seconds especially after you have been in a public place, or after blowing your nose, coughing, or sneezing." />
-            <Bulletin title="If soap and water are not readily available, use a hand sanitizer that contains at least 60% alcohol. Cover all surfaces of your hands and rub them together until they feel dry." />
-            <Bulletin title="Avoid touching your eyes, nose, and mouth with unwashed hands." />
+            <Bulletin title={i18n.t('prevention1Bulletin1')} />
+            <Bulletin title={i18n.t('prevention1Bulletin2')} />
+            <Bulletin title={i18n.t('prevention1Bulletin3')} />
           </View>
         ),
       },
       {
         backgroundImage: backImg3,
-        title: 'Avoid close contact',
+        title: i18n.t('prevention2'),
         child: (
           <View>
-            <Bulletin title="Avoid close contact with people who are sick" />
-            <Bulletin title="Put distance between yourself and other people if COVID-19 is spreading in your community. This is especially important for people who are at higher risk of getting very sick." />
+            <Bulletin title={i18n.t('prevention2Bulletin1')} />
+            <Bulletin title={i18n.t('prevention2Bulletin2')} />
           </View>
         ),
       }];

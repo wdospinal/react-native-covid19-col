@@ -6,6 +6,7 @@ import { Container, SymptomCard, BackBtn } from '../components';
 import imgSymptoms from '../res/symptoms.png';
 import imgSymptoms1 from '../res/symptoms-1.png';
 import imgSymptoms2 from '../res/symptoms-2.png';
+import i18n from '../translation';
 
 const styles = {
   warningContainer: {
@@ -24,9 +25,9 @@ class Symptopms extends React.PureComponent {
       <Container>
         <BackBtn onPress={() => navigation.goBack()} />
         <View style={{ alignItems: 'center', paddingTop: 50, paddingBottom: 100 }}>
-          <SymptomCard source={imgSymptoms} symptom="Fever" />
-          <SymptomCard source={imgSymptoms1} symptom="Cough" />
-          <SymptomCard source={imgSymptoms2} symptom="Shortness of breath" />
+          <SymptomCard source={imgSymptoms} symptom={i18n.t('fever')} />
+          <SymptomCard source={imgSymptoms1} symptom={i18n.t('cough')} />
+          <SymptomCard source={imgSymptoms2} symptom={i18n.t('shortness')} />
 
           <View style={styles.warningContainer}>
             <Icon
@@ -36,12 +37,7 @@ class Symptopms extends React.PureComponent {
               containerStyle={{ marginRight: 20 }}
             />
             <Text style={{ flex: 4, color: 'gold' }}>
-              Seek medical advice if you develop
-              symptoms, and have been in close
-              contact with a person known to
-              have COVID-19 or if you live in or
-              have recently been in an area with
-              ongoing spread of COVID-19.
+              {i18n.t('seekMedical')}
             </Text>
           </View>
         </View>

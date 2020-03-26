@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 import { textColor, primaryColor } from '../config';
+import i18n from '../translation';
 
 const styles = {
   container: {
@@ -69,8 +70,8 @@ class CasesCard extends React.PureComponent {
           <View style={{ flex: 5, padding: 10 }}>
             <Text style={styles.regionText}>{`${provinceState} ${countryRegion}`}</Text>
             {/* //text color changes based on case type */}
-            <Text style={[styles.caseTypeText, { color }]}>{`${type} ${caso[type.toLowerCase()]}`}</Text>
-            <Text style={{ color: textColor.secondary }}>{`Ultima actualización ${(new Date(caso.lastUpdate)).toDateString()}`}</Text>
+            <Text style={[styles.caseTypeText, { color }]}>{`${i18n.t(type)} ${caso[type.toLowerCase()]}`}</Text>
+            <Text style={{ color: textColor.secondary }}>{`${i18n.t('lastUpdate')} ${(new Date(caso.lastUpdate)).toDateString()}`}</Text>
           </View>
         </View>
       </TouchableOpacity>

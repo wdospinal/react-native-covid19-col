@@ -17,6 +17,7 @@ import imgSymptoms9 from '../res/symptoms-9.png';
 import imgSymptoms10 from '../res/symptoms-10.png';
 import imgSymptoms11 from '../res/symptoms-11.png';
 import WhatToDoCard from '../components/WhatToDoCard';
+import i18n from '../translation';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -37,79 +38,78 @@ class WhatToDo extends React.PureComponent {
     const data = [
       {
         image: imgSymptoms1,
-        title: 'Stay home except to get medical care',
+        title: i18n.t('whatToDO1'),
         points: [
-          'Stay home: People who are mildly ill with COVID-19 are able to recover at home. Do not leave, except to get medical care. Do not visit public areas.',
-          'Stay in touch with your doctor. Call before you get medical care. Be sure to get care if you feel worse or you think it is an emergency.',
-          'Stay in touch with your doctor. Call before you get medical care. Be sure to get care if you feel worse or you think it is an emergency.',
+          i18n.t('whatToDO1point1'),
+          i18n.t('whatToDO1point2'),
         ],
       },
       {
         image: imgSymptoms4,
-        title: 'Separate yourself from other people in your home, this is known as home isolation',
+        title: i18n.t('whatToDO2'),
         points: [
-          'Stay away from others: As much as possible, you should stay in a specific “sick room” and away from other people in your home. Use a separate bathroom, if available.',
-          'Limit contact with pets & animals: You should restrict contact with pets and other animals, just like you would around other people.',
+          i18n.t('whatToDO2point1'),
+          i18n.t('whatToDO2point2'),
         ],
       },
       {
         image: imgSymptoms5,
-        title: 'Call ahead before visiting your doctor',
+        title: i18n.t('whatToDO3'),
         points: [
-          'Call ahead: If you have a medical appointment, call your doctor’s office or emergency department, and tell them you have or may have COVID-19. This will help the office protect themselves and other patients.',
+          i18n.t('whatToDO3point1'),
         ],
       },
       {
         image: imgSymptoms6,
-        title: 'Wear a facemask if you are sick',
+        title: i18n.t('whatToDO4'),
         points: [
-          'If you are sick: You should wear a facemask when you are around other people and before you enter a healthcare provider’s office.',
-          'If you are caring for others: If the person who is sick is not able to wear a facemask (for example, because it causes trouble breathing), then people who live in the home should stay in a different room. When caregivers enter the room of the sick person, they should wear a facemask. Visitors, other than caregivers, are not recommended.',
+          i18n.t('whatToDO4point1'),
+          i18n.t('whatToDO4point2'),
         ],
       },
       {
         image: imgSymptoms7,
-        title: 'Cover your coughs and sneezes',
+        title: i18n.t('whatToDO5'),
         points: [
-          'Cover: Cover your mouth and nose with a tissue when you cough or sneeze.',
-          'Dispose: Throw used tissues in a lined trash can.',
-          'Wash hands: Immediately wash your hands with soap and water for at least 20 seconds. If soap and water are not available, clean your hands with an alcohol-based hand sanitizer that contains at least 60% alcohol.',
+          i18n.t('whatToDO5point1'),
+          i18n.t('whatToDO5point2'),
+          i18n.t('whatToDO5point3'),
         ],
       },
       {
         image: imgSymptoms8,
-        title: 'Clean your hands often',
+        title: i18n.t('whatToDO6'),
         points: [
-          'Wash hands: Wash your hands often with soap and water for at least 20 seconds. This is especially important after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food.',
-          'Hand sanitizer: If soap and water are not available, use an alcohol-based hand sanitizer with at least 60% alcohol, covering all surfaces of your hands and rubbing them together until they feel dry.',
-          'Soap and water: Soap and water are the best option, especially if hands are visibly dirty.',
-          'Avoid touching: Avoid touching your eyes, nose, and mouth with unwashed hands.',
+          i18n.t('whatToDO6point1'),
+          i18n.t('whatToDO6point2'),
+          i18n.t('whatToDO6point3'),
+          i18n.t('whatToDO6point4'),
         ],
       },
       {
         image: imgSymptoms9,
-        title: 'Avoid sharing personal household items',
+        title: i18n.t('whatToDO7'),
         points: [
-          'Do not share: Do not share dishes, drinking glasses, cups, eating utensils, towels, or bedding with other people in your home.',
-          'Wash thoroughly after use: After using these items, wash them thoroughly with soap and water or put in the dishwasher.',
+          i18n.t('whatToDO7point1'),
+          i18n.t('whatToDO7point2'),
         ],
       },
       {
         image: imgSymptoms10,
-        title: 'Clean all “high-touch” surfaces everyday',
+        title: i18n.t('whatToDO8'),
         points: [
-          'Clean and disinfect: Routinely clean high-touch surfaces in your “sick room” and bathroom. Let someone else clean and disinfect surfaces in common areas, but not your bedroom and bathroom.',
-          'Clean and disinfect areas that may have blood, stool, or body fluids on them.',
-          'Household cleaners and disinfectants: Clean the area or item with soap and water or another detergent if it is dirty. Then, use a household disinfectant.',
+          i18n.t('whatToDO8point1'),
+          i18n.t('whatToDO8point2'),
+          i18n.t('whatToDO8point3'),
         ],
       },
       {
         image: imgSymptoms11,
-        title: 'Monitor your symptoms',
+        title: i18n.t('whatToDO9'),
         points: [
-          'Seek medical attention, but call first: Seek medical care right away if your illness is worsening (for example, if you have difficulty breathing).',
-          'Wear a facemask: If possible, put on a facemask before you enter the building. If you can’t put on a facemask, try to keep a safe distance from other people (at least 6 feet away). This will help protect the people in the office or waiting room.',
-          'Follow care instructions from your healthcare provider and local health department: Your local health authorities will give instructions on checking your symptoms and reporting information.',
+          i18n.t('whatToDO9point1'),
+          i18n.t('whatToDO9point2'),
+          i18n.t('whatToDO9point3'),
         ],
       },
     ];

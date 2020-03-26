@@ -7,6 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 import backImg1 from '../res/background-1.jpg';
 import backImg2 from '../res/background-2.jpg';
 import { HowItSpreadsCard, Container, BackBtn } from '../components';
+import i18n from '../translation';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -17,11 +18,11 @@ class HowItSpreads extends React.PureComponent {
       <View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={{ color: 'white', marginRight: 10 }}>*</Text>
-          <Text style={{ fontSize: 11, color: 'white' }}>Between people who are in close contact with one another (within about 6 feet</Text>
+          <Text style={{ fontSize: 11, color: 'white' }}>{i18n.t('howItSpreads1Bulletin1')}</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={{ color: 'white', marginRight: 10 }}>*</Text>
-          <Text style={{ fontSize: 11, color: 'white' }}>Through respiratory droplets produced when an infected person coughs or sneezes.</Text>
+          <Text style={{ fontSize: 11, color: 'white' }}>{i18n.t('howItSpreads1Bulletin2')}</Text>
         </View>
       </View>
     );
@@ -46,14 +47,14 @@ class HowItSpreads extends React.PureComponent {
             data={[
               {
                 backgroundImage: backImg1,
-                title: 'Person-to-person spread',
-                description: 'The virus is thought to spread mainly from person-to-person',
+                title: i18n.t('howItSpreads1'),
+                description: i18n.t('howItSpreads1Description'),
                 child: chhild,
               },
               {
                 backgroundImage: backImg2,
-                title: 'Spread from contact with contaminated surfaces or objects',
-                description: 'It may be possible that a person can get COVID-19 by touching a surface or object that has the virus on it and then touching their own mouth, nose, or possibly their eyes, but this is not thought to be the main way the virus spreads.',
+                title: i18n.t('howItSpreads2'),
+                description: i18n.t('howItSpreads2Description'),
               }]}
             renderItem={renderItem}
             sliderWidth={WINDOW_WIDTH}

@@ -43,8 +43,6 @@ const tabBarOptions = {
     // borderTopRightRadius: 20,
     // borderTopLeftRadius: 20
   },
-  tabStyle: {
-  },
 };
 function StatsStack() {
   return (
