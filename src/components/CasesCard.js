@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 import { textColor, primaryColor } from '../config';
 import i18n from '../translation';
 
@@ -33,7 +34,7 @@ class CasesCard extends React.PureComponent {
     const { provinceState: province, countryRegion: country } = caso;
     const provinceState = province || '';
     const countryRegion = country || '';
-
+    Moment.locale(i18n.locale);
     let iconName;
     let color;
 
@@ -71,7 +72,7 @@ class CasesCard extends React.PureComponent {
             <Text style={styles.regionText}>{`${provinceState} ${countryRegion}`}</Text>
             {/* //text color changes based on case type */}
             <Text style={[styles.caseTypeText, { color }]}>{`${i18n.t(type)} ${caso[type.toLowerCase()]}`}</Text>
-            <Text style={{ color: textColor.secondary }}>{`${i18n.t('lastUpdate')} ${(new Date(caso.lastUpdate)).toDateString()}`}</Text>
+            <Text style={{ color: textColor.secondary }}>{`${i18n.t('lastUpdate')} ${Moment(caso.lastUpdate).format('MMMM Do YYYY')}`}</Text>
           </View>
         </View>
       </TouchableOpacity>

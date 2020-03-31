@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 import CaseStateText from './CaseStateText';
 import { primaryColor, textColor } from '../config';
 import i18n from '../translation';
@@ -23,6 +24,10 @@ const styles = {
 class DailyCard extends React.PureComponent {
   render() {
     const { case: caso } = this.props;
+    const {
+      active, confirmed, recovered, deaths, lastUpdate,
+    } = caso[0];
+    Moment.locale(i18n.locale);
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -44,26 +49,26 @@ class DailyCard extends React.PureComponent {
         </View>
         <View style={{ flex: 6 }}>
           <Text style={{ color: textColor.normal }}>
-            {new Date(caso.reportDate).toDateString()}
+            {Moment(lastUpdate).format('MMMM Do YYYY')}
           </Text>
           <View style={{ flexDirection: 'row' }}>
             <CaseStateText
               state="Confirmed"
-              value={caso.totalConfirmed ? caso.totalConfirmed : 0}
-              delta={caso.deltaConfirmed ? caso.deltaConfirmed : 0}
+              value={parseInt(confirmed, 10) || 0}
+              delta={parseInt(confirmed, 10) || 0}
             />
             <CaseStateText
               state="Recovered"
-              value={caso.totalRecovered ? caso.totalRecovered : 0}
-              delta={caso.deltaRecovered ? caso.deltaRecovered : 0}
+              value={parseInt(recovered, 10) || 0}
+              delta={parseInt(recovered, 10) || 0}
             />
           </View>
           <Text style={styles.descriptionText}>
             {`${i18n.t('total')} ${
-              caso.mainlandChina ? caso.mainlandChina : 0
-            } ${i18n.t('casesInChina')} ${
-              caso.otherLocations ? caso.otherLocations : 0
-            } ${i18n.t('inOtherLocations')}`}
+              active || 0
+            } ${i18n.t('casesInColombia')} ${
+              deaths || 0
+            } ${i18n.t('sadlyDeceased')}`}
           </Text>
         </View>
       </View>

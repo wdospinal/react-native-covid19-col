@@ -7,8 +7,11 @@ const en = {
   Recovered: 'Recovered',
   lastUpdate: 'Last updated',
   total: 'Total',
-  casesInChina: 'casos in China and',
+  casesInChina: 'cases in China and',
+  casesInColombia: 'cases in Colombia and',
   inOtherLocations: 'in other locations',
+  sadlyDeceased: 'sadly deceased.',
+  informationCenter: 'Information Center',
   typeCity: 'Type City or province region',
   // How it spreads
   howItSpreads: 'How it spreads',

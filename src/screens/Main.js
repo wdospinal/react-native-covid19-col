@@ -30,6 +30,16 @@ const styles = {
     paddingLeft: 30,
   },
 };
+const checkColombia = (country) => country.countryRegion === 'Colombia';
+
+const filterColombia = (array) => {
+  const final = [];
+  array.forEach((element) => {
+    final.push(element.filter(checkColombia));
+  });
+
+  return final;
+};
 
 class Main extends React.PureComponent {
   componentDidMount() {
@@ -65,7 +75,7 @@ class Main extends React.PureComponent {
           <Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
           <FlatList
-            data={dailyUpdate.reverse().slice(0, 3)}
+            data={filterColombia(dailyUpdate).reverse()}
             renderItem={renderItem}
             contentContainerStyle={{ marginTop: 20, marginBottom: 20 }}
             inverted

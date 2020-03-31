@@ -23,9 +23,15 @@ import { baseUrl } from '../config';
 // worker Saga: will be fired on DAILY_UPDATE_FETCH_SUCCEEDED actions
 function* fetchDaily() {
   try {
-    const response = yield fetch(`${baseUrl}/daily`);
+    let response = {};
+    const result = [];
+    response = yield fetch(`${baseUrl}/daily/3-30-2020`);
+    result[0] = yield response.json();
+    response = yield fetch(`${baseUrl}/daily/3-29-2020`);
+    result[1] = yield response.json();
+    response = yield fetch(`${baseUrl}/daily/3-28-2020`);
+    result[2] = yield response.json();
     if (response.status === 200) {
-      const result = yield response.json();
       yield put({ type: DAILY_UPDATE_FETCH_SUCCEEDED, result });
     } else {
       yield put({ type: DAILY_UPDATE_FETCH_FAILED, error: response.status });
@@ -43,7 +49,7 @@ function* fetchCases() {
       const cases = {
         confirmed: result.confirmed.value,
         recovered: result.recovered.value,
-        deceased: result.deceased.value,
+        deceased: result.deaths.value,
       };
       yield put({ type: CASES_UPDATE_FETCH_SUCCEEDED, cases });
     } else {
@@ -62,7 +68,7 @@ function* fetchColombia() {
       const colombia = {
         colLastUpdated: result.lastUpdate,
         colConfirmed: result.confirmed.value,
-        colDeceased: result.deceased.value,
+        colDeceased: result.deaths.value,
         colRecovered: result.recovered.value,
       };
       yield put({ type: FETCH_COLOMBIA_SUCCEEDED, colombia });

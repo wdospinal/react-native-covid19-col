@@ -9,7 +9,10 @@ const es = {
   lastUpdate: 'Ultima actualización',
   total: 'Total',
   casesInChina: 'casos en China y',
-  inOtherLocations: 'en otras locaciones',
+  casesInColombia: 'casos en Colombia y',
+  inOtherLocations: 'en otras locaciones.',
+  sadlyDeceased: 'lamentables fallecimientos.',
+  informationCenter: 'Centro de información',
   typeCity: 'Escribe el pais o departamento',
 
   // How it spreads

@@ -16,7 +16,7 @@ class Advice extends React.PureComponent {
     return (
       <Container>
         <View style={styles.container}>
-          <Text style={styles.regionInformation}>Information Center</Text>
+          <Text style={styles.regionInformation}>{i18n.t('informationCenter')}</Text>
 
           <AdviceCard
             onPress={() => navigation.navigate('HowItSpreads')}

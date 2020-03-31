@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import AnimateNumber from 'react-native-animate-number';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 import { textColor, primaryColor } from '../config';
 import i18n from '../translation';
 
@@ -10,7 +11,6 @@ class CountryCard extends React.PureComponent {
     const {
       lastUpdated, country, confirmed, deceased, recovered,
     } = this.props;
-
     const styles = {
       container: {
         justifyContent: 'center',
@@ -65,10 +65,7 @@ class CountryCard extends React.PureComponent {
         </View>
       );
     }
-
-    const options = {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-    };
+    Moment.locale(i18n.locale);
     return (
       <View style={styles.container}>
         <Text style={{ color: textColor.normal, marginBottom: 10 }}>
@@ -77,7 +74,7 @@ class CountryCard extends React.PureComponent {
         <Text
           style={{ color: textColor.secondary, fontSize: 11 }}
         >
-          {`${i18n.t('lastUpdate')} ${new Date(lastUpdated).toLocaleDateString(i18n.locate, options)}`}
+          {`${i18n.t('lastUpdate')} ${Moment(lastUpdated).format('MMMM Do YYYY')}`}
         </Text>
         <View style={{ flexDirection: 'row' }}>
           <CaseText case="Confirmed" value={confirmed} />
