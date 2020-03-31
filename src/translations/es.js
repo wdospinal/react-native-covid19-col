@@ -4,7 +4,7 @@ const es = {
   advice: 'Consejos',
   settings: 'Opciones',
   Confirmed: 'Confirmados',
-  Deaths: 'Muertos',
+  Deceased: 'Fallecidos',
   Recovered: 'Recuperados',
   lastUpdate: 'Ultima actualización',
   total: 'Total',

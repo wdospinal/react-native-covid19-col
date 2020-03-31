@@ -8,13 +8,13 @@ const initialState = {
   cases: {
     confirmed: 0,
     recovered: 0,
-    deaths: 0,
+    deceased: 0,
   },
   dailyUpdate: [],
   colombia: {
     colLastUpdated: '',
     colConfirmed: 0,
-    colDeaths: 0,
+    colDeceased: 0,
     colRecovered: 0,
   },
 };

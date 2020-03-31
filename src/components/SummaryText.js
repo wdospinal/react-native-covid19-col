@@ -36,8 +36,8 @@ class SummaryText extends React.PureComponent {
       case 'Recovered':
         subTextColor = textColor.recovered;
         break;
-      case 'Deaths':
-        subTextColor = textColor.deaths;
+      case 'Deceased':
+        subTextColor = textColor.deceased;
         break;
       default:
         subTextColor = textColor.confirmed;

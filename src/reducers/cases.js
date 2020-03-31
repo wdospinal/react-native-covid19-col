@@ -11,7 +11,7 @@ const initialState = {
   cases: {
     Confirmed: 0,
     Recovered: 0,
-    Deaths: 0,
+    Deceased: 0,
   },
   search: '',
   data: [],

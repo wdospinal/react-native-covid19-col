@@ -46,13 +46,13 @@ class CasesCard extends React.PureComponent {
         iconName = 'smile-circle';
         color = textColor.recovered;
         break;
-      case 'Deaths':
+      case 'Deceased':
         iconName = 'frown';
-        color = textColor.deaths;
+        color = textColor.deceased;
         break;
       default:
         iconName = 'frown';
-        color = textColor.deaths;
+        color = textColor.deceased;
         break;
     }
     return (

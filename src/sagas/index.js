@@ -43,7 +43,7 @@ function* fetchCases() {
       const cases = {
         confirmed: result.confirmed.value,
         recovered: result.recovered.value,
-        deaths: result.deaths.value,
+        deceased: result.deceased.value,
       };
       yield put({ type: CASES_UPDATE_FETCH_SUCCEEDED, cases });
     } else {
@@ -62,7 +62,7 @@ function* fetchColombia() {
       const colombia = {
         colLastUpdated: result.lastUpdate,
         colConfirmed: result.confirmed.value,
-        colDeaths: result.deaths.value,
+        colDeceased: result.deceased.value,
         colRecovered: result.recovered.value,
       };
       yield put({ type: FETCH_COLOMBIA_SUCCEEDED, colombia });

@@ -8,7 +8,7 @@ import i18n from '../translation';
 class CountryCard extends React.PureComponent {
   render() {
     const {
-      lastUpdated, country, confirmed, deaths, recovered,
+      lastUpdated, country, confirmed, deceased, recovered,
     } = this.props;
 
     const styles = {
@@ -37,8 +37,8 @@ class CountryCard extends React.PureComponent {
         case 'Confirmed':
           color = textColor.confirmed;
           break;
-        case 'Deaths':
-          color = textColor.deaths;
+        case 'Deceased':
+          color = textColor.deceased;
           break;
         case 'Recovered':
           color = textColor.recovered;
@@ -81,7 +81,7 @@ class CountryCard extends React.PureComponent {
         </Text>
         <View style={{ flexDirection: 'row' }}>
           <CaseText case="Confirmed" value={confirmed} />
-          <CaseText case="Deaths" value={deaths} />
+          <CaseText case="Deceased" value={deceased} />
           <CaseText case="Recovered" value={recovered} />
         </View>
       </View>
@@ -93,7 +93,7 @@ CountryCard.propTypes = {
   lastUpdated: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   confirmed: PropTypes.number.isRequired,
-  deaths: PropTypes.number.isRequired,
+  deceased: PropTypes.number.isRequired,
   recovered: PropTypes.number.isRequired,
 };
 

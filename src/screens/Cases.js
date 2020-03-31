@@ -100,11 +100,11 @@ class Cases extends React.PureComponent {
       case 'Recovered':
         markerColor = textColor.recovered;
         break;
-      case 'Deaths':
-        markerColor = textColor.deaths;
+      case 'Deceased':
+        markerColor = textColor.deceased;
         break;
       default:
-        markerColor = textColor.deaths;
+        markerColor = textColor.deceased;
         break;
     }
 

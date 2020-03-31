@@ -3,7 +3,7 @@ const en = {
   advice: 'Advice',
   settings: 'Settings',
   Confirmed: 'Confirmed',
-  Deaths: 'Deaths',
+  Deceased: 'Deceased',
   Recovered: 'Recovered',
   lastUpdate: 'Last updated',
   total: 'Total',

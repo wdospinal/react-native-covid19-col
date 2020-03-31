@@ -44,7 +44,7 @@ class Main extends React.PureComponent {
       navigation, cases, dailyUpdate, colombia,
     } = this.props;
     const {
-      colLastUpdated, colConfirmed, colDeaths, colRecovered,
+      colLastUpdated, colConfirmed, colDeceased, colRecovered,
     } = colombia;
     function renderItem({ item }) {
       return (
@@ -57,11 +57,11 @@ class Main extends React.PureComponent {
           <View>
             <SummaryText text={cases.confirmed} subText="Confirmed" onPress={() => navigation.navigate('Cases', { case: 'Confirmed' })} />
             <SummaryText text={cases.recovered} subText="Recovered" onPress={() => navigation.navigate('Cases', { case: 'Recovered' })} />
-            <SummaryText text={cases.deaths} subText="Deaths" onPress={() => navigation.navigate('Cases', { case: 'Deaths' })} />
+            <SummaryText text={cases.deceased} subText="Deceased" onPress={() => navigation.navigate('Cases', { case: 'Deceased' })} />
           </View>
         </View>
         <View style={{ marginTop: 20, paddingBottom: 100 }}>
-          <CountryCard country="Colombia" lastUpdated={colLastUpdated} confirmed={colConfirmed} deaths={colDeaths} recovered={colRecovered} />
+          <CountryCard country="Colombia" lastUpdated={colLastUpdated} confirmed={colConfirmed} deceased={colDeceased} recovered={colRecovered} />
           <Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
           <FlatList
