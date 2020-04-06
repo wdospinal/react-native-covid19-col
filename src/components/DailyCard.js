@@ -27,7 +27,6 @@ class DailyCard extends React.PureComponent {
     const {
       active, confirmed, recovered, deaths, lastUpdate,
     } = caso[0];
-    Moment.locale(i18n.locale);
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>

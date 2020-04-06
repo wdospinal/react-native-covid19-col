@@ -38,6 +38,7 @@
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION"
       ],
+      "googleServicesFile": "./google-services.json",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAqJzy30ieXaOP0iCBf2iScNPvx9cm5nQU"

@@ -35,9 +35,9 @@ const checkColombia = (country) => country.countryRegion === 'Colombia';
 const filterColombia = (array) => {
   const final = [];
   array.forEach((element) => {
-    final.push(element.filter(checkColombia));
+    const filterDataColombia = element.filter(checkColombia);
+    if (filterDataColombia.length > 0) final.push(filterDataColombia);
   });
-
   return final;
 };
 

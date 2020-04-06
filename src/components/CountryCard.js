@@ -65,7 +65,6 @@ class CountryCard extends React.PureComponent {
         </View>
       );
     }
-    Moment.locale(i18n.locale);
     return (
       <View style={styles.container}>
         <Text style={{ color: textColor.normal, marginBottom: 10 }}>

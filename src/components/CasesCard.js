@@ -34,7 +34,6 @@ class CasesCard extends React.PureComponent {
     const { provinceState: province, countryRegion: country } = caso;
     const provinceState = province || '';
     const countryRegion = country || '';
-    Moment.locale(i18n.locale);
     let iconName;
     let color;
 
