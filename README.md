@@ -11,7 +11,7 @@ the Chinese Centre for Disease Control and Prevention (ECDC) and the Nigeria Cen
 Todo gracias a la api [API](https://github.com/mathdroid/covid-19-api) como servidor de backend.
 
 # ⬇ Descargalo ahora para Android ⬇
-https://drive.google.com/open?id=1SleOZXIc42r2aQgx39oeq5gH-uBBUNIU
+https://drive.google.com/open?id=1ZuoWzXtwqU9yIdZ6s4JDnZQrMqMcf4kY
 
 ## Herramientas usadas en el projecto
 * [Expo](https://expo.io/) para compilar y en etapa de desarrollo.
