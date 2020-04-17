@@ -38,7 +38,7 @@ class Advice extends React.PureComponent {
           />
           <AdviceCard
             onPress={() => navigation.navigate('WhatToDo')}
-            icon={<Icon name="question" type="foundation" color="gold" />}
+            icon={<Icon name="archive" type="foundation" color="gold" />}
             title={i18n.t('whatToDO')}
             description={i18n.t('learnWhatToDO')}
           />
