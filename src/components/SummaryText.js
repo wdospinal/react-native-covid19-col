@@ -49,7 +49,7 @@ class SummaryText extends React.PureComponent {
           <AnimateNumber
             style={styles.text}
             value={text}
-            formatter={(val) => parseFloat(val).toFixed(0)}
+            formatter={(val) => parseFloat(val).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           />
           <Text style={[styles.subText, { color: subTextColor }]}>{i18n.t(subText)}</Text>
         </TouchableOpacity>
