@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { GET_CASES, GET_DAILY, GET_COLOMBIA } from '../actions';
+import { GET_CASES, GET_DAILY } from '../actions';
 import {
   SummaryText, DailyCard, Container, CountryCard,
 } from '../components';
@@ -44,19 +44,15 @@ const filterColombia = (array) => {
 
 class Main extends React.PureComponent {
   componentDidMount() {
-    const { getCases, getDaily, getColombia } = this.props;
+    const { getCases, getDaily } = this.props;
     getCases();
     getDaily();
-    getColombia();
   }
 
   render() {
     const {
-      navigation, cases, dailyUpdate, colombia,
+      navigation, cases, dailyUpdate,
     } = this.props;
-    const {
-      colLastUpdated, colConfirmed, colDeceased, colRecovered,
-    } = colombia;
     function renderItem({ item }) {
       return (
         <DailyCard case={item} />
@@ -72,7 +68,7 @@ class Main extends React.PureComponent {
           </View>
         </View>
         <View style={{ marginTop: 20, paddingBottom: 100 }}>
-          <CountryCard country="Colombia" lastUpdated={colLastUpdated} confirmed={colConfirmed} deceased={colDeceased} recovered={colRecovered} />
+          <CountryCard country="Colombia" />
           <Text style={styles.dailyUpdatesText}>Recent Updates</Text>
 
           <FlatList
@@ -93,29 +89,23 @@ Main.propTypes = {
   dailyUpdate: PropTypes.instanceOf(Object),
   getCases: PropTypes.func,
   getDaily: PropTypes.func,
-  getColombia: PropTypes.func,
-  colombia: PropTypes.instanceOf(Object),
 };
 
 Main.defaultProps = {
   cases: {},
   dailyUpdate: {},
-  colombia: {},
   getCases: () => {},
   getDaily: () => {},
-  getColombia: () => {},
 };
 
 const mapStateToProps = (state) => ({
   cases: state.main.cases,
   dailyUpdate: state.main.dailyUpdate,
-  colombia: state.main.colombia,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCases: () => dispatch({ type: GET_CASES }),
   getDaily: () => dispatch({ type: GET_DAILY }),
-  getColombia: () => dispatch({ type: GET_COLOMBIA }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

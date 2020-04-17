@@ -1,10 +1,13 @@
 const es = {
   // General
   stats: 'Estados',
+  world: 'Latin America',
   advice: 'Consejos',
   settings: 'Opciones',
   Confirmed: 'Confirmados',
   Deceased: 'Fallecidos',
+  Deaths: 'Muertos',
+  latinAmerica: 'Latin America Actualización',
   Recovered: 'Recuperados',
   lastUpdate: 'Ultima actualización',
   total: 'Total',

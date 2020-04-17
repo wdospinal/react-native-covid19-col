@@ -1,9 +1,12 @@
 const en = {
   stats: 'Stats',
+  world: 'Global',
   advice: 'Advice',
   settings: 'Settings',
   Confirmed: 'Confirmed',
   Deceased: 'Deceased',
+  Deaths: 'Deaths',
+  latinAmerica: 'Latin America Updates',
   Recovered: 'Recovered',
   lastUpdate: 'Last updated',
   total: 'Total',

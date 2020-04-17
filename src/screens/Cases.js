@@ -146,8 +146,8 @@ class Cases extends React.PureComponent {
               <Marker
                 key={item.index}
                 coordinate={{
-                  longitude: item.long,
-                  latitude: item.lat,
+                  longitude: item.long || 0,
+                  latitude: item.lat || 0,
                 }}
                 pinColor={markerColor}
               />

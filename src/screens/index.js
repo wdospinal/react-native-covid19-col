@@ -5,5 +5,6 @@ export { default as HowItSpreads } from './HowItSpreads';
 export { default as Prevention } from './Prevention';
 export { default as Symptoms } from './Symptoms';
 export { default as Settings } from './Settings';
+export { default as World } from './World';
 export { default as WhatToDo } from './WhatToDo';
 export { default as Blank } from './Blank';

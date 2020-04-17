@@ -16,6 +16,9 @@ import {
   FETCH_COLOMBIA_SUCCEEDED,
   FETCH_COLOMBIA_FAILED,
   GET_COLOMBIA,
+  GET_COUNTRY,
+  FETCH_COUNTRY__FAILED,
+  FETCH_COUNTRY_SUCCEEDED,
 } from '../actions';
 
 import { baseUrl } from '../config';
@@ -89,6 +92,29 @@ function* fetchColombia() {
   }
 }
 
+function* fetchCountry({ country }) {
+  try {
+    const response = yield fetch(`${baseUrl}/countries/${country}`);
+    if (response.status === 200) {
+      const result = yield response.json();
+      const action = {
+        type: FETCH_COUNTRY_SUCCEEDED,
+      };
+      action[country] = {
+        lastUpdate: result.lastUpdate,
+        confirmed: result.confirmed.value,
+        deaths: result.deaths.value,
+        recovered: result.recovered.value,
+      };
+      yield put(action);
+    } else {
+      yield put({ type: FETCH_COUNTRY__FAILED, error: response.status });
+    }
+  } catch (e) {
+    yield put({ type: CASES_UPDATE_FETCH_FAILED, message: e.message });
+  }
+}
+
 function* fetchEachCase(action) {
   try {
     const caseType = action.caso.toLowerCase();
@@ -120,7 +146,6 @@ function* filterData(action) {
       );
     });
   } else {
-    console.log('new Data');
     newData = data;
   }
   yield put({ type: SET_FILTERED_DATA, newData }); // setFilteredData(newData);
@@ -144,6 +169,9 @@ function* watchFilterData() {
 function* watchFetchColombia() {
   yield takeEvery(GET_COLOMBIA, fetchColombia);
 }
+function* watchFetchCountry() {
+  yield takeEvery(GET_COUNTRY, fetchCountry);
+}
 // TODO: setI18nConfig
 export default function* rootSaga() {
   yield all([
@@ -152,5 +180,6 @@ export default function* rootSaga() {
     watchFetchEachCase(),
     watchFilterData(),
     watchFetchColombia(),
+    watchFetchCountry(),
   ]);
 }
