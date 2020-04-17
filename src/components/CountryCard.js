@@ -3,14 +3,25 @@ import { View, Text } from 'react-native';
 import AnimateNumber from 'react-native-animate-number';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
+import { connect } from 'react-redux';
 import { textColor, primaryColor } from '../config';
 import i18n from '../translation';
+import { GET_COUNTRY } from '../actions';
 
 class CountryCard extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    const { getCountry, country } = this.props;
+    getCountry(country);
+  }
+
   render() {
+    const { countryValues, country } = this.props;
+    const currentCountry = countryValues[country] || {};
     const {
-      lastUpdated, country, confirmed, deceased, recovered,
-    } = this.props;
+      lastUpdated = new Date(), confirmed = 0, deaths = 0, recovered = 0,
+    } = currentCountry;
+    console.log(lastUpdated);
     const styles = {
       container: {
         justifyContent: 'center',
@@ -77,7 +88,7 @@ class CountryCard extends React.PureComponent {
         </Text>
         <View style={{ flexDirection: 'row' }}>
           <CaseText case="Confirmed" value={confirmed} />
-          <CaseText case="Deceased" value={deceased} />
+          <CaseText case="Deceased" value={deaths} />
           <CaseText case="Recovered" value={recovered} />
         </View>
       </View>
@@ -85,12 +96,27 @@ class CountryCard extends React.PureComponent {
   }
 }
 
-CountryCard.propTypes = {
-  lastUpdated: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  confirmed: PropTypes.number.isRequired,
-  deceased: PropTypes.number.isRequired,
-  recovered: PropTypes.number.isRequired,
+CountryCard.defaultProps = {
+  countryValues: {
+    lastUpdated: '',
+    confirmed: 0,
+    deaths: 0,
+    recovered: 0,
+  },
 };
 
-export default CountryCard;
+CountryCard.propTypes = {
+  country: PropTypes.string.isRequired,
+  getCountry: PropTypes.func.isRequired,
+  countryValues: PropTypes.instanceOf(Object),
+};
+
+const mapStateToProps = (state) => ({
+  countryValues: state.country,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCountry: (country) => dispatch({ type: GET_COUNTRY, country }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CountryCard);
