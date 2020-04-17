@@ -12,6 +12,7 @@ import { primaryColor, textColor } from '../config';
 
 const styles = {
   summaryCard: {
+    marginTop: 20,
     height: 300,
     width: '92%',
     backgroundColor: primaryColor,
@@ -67,7 +68,7 @@ class Main extends React.PureComponent {
           <View>
             <SummaryText text={cases.confirmed} subText="Confirmed" onPress={() => navigation.navigate('Cases', { case: 'Confirmed' })} />
             <SummaryText text={cases.recovered} subText="Recovered" onPress={() => navigation.navigate('Cases', { case: 'Recovered' })} />
-            <SummaryText text={cases.deceased} subText="Deceased" onPress={() => navigation.navigate('Cases', { case: 'Deceased' })} />
+            <SummaryText text={cases.deceased} subText="Deceased" onPress={() => navigation.navigate('Cases', { case: 'Deaths' })} />
           </View>
         </View>
         <View style={{ marginTop: 20, paddingBottom: 100 }}>
