@@ -16,6 +16,7 @@ import {
   Cases,
   Settings,
   Blank,
+  World,
 } from './src/screens';
 import { textColor, tabBarColor } from './src/config';
 import store from './src/store';
@@ -81,6 +82,8 @@ export default function App() {
                 return <SimpleLineIcon name="notebook" color={iconColor} size={size} />;
               } if (route.name === i18n.t('settings')) {
                 return <SimpleLineIcon name="settings" color={iconColor} size={size} />;
+              } if (route.name === i18n.t('world')) {
+                return <Entypo name="compass" color={iconColor} size={size} />;
               }
               return <SimpleLineIcon name="empty" color={iconColor} size={size} />;
             },
@@ -91,6 +94,7 @@ export default function App() {
           headerMode="none"
         >
           <Tab.Screen name={i18n.t('stats')} component={StatsStack} />
+          <Tab.Screen name={i18n.t('world')} component={World} />
           <Tab.Screen name={i18n.t('advice')} component={AdviceStack} />
           <Tab.Screen name={i18n.t('settings')} component={Settings} />
         </Tab.Navigator>
