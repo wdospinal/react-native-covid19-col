@@ -1,6 +1,5 @@
 import { all, put, takeEvery } from 'redux-saga/effects';
 import Moment from 'moment';
-import * as Analytics from 'expo-firebase-analytics';
 import {
   CASES_UPDATE_FETCH_SUCCEEDED,
   CASES_UPDATE_FETCH_FAILED,
@@ -27,27 +26,26 @@ function* fetchDaily() {
   try {
     let response = {};
     const result = [];
+    let json = {};
     let startdate;
     startdate = Moment().subtract(2, 'days').format('D-M-YYYY');
     response = yield fetch(`${baseUrl}/daily/${startdate}`);
-    result[0] = yield response.json();
+    json = yield response.json();
+    if (json) result.push(json);
     startdate = Moment().subtract(3, 'days').format('D-M-YYYY');
     response = yield fetch(`${baseUrl}/daily/${startdate}`);
-    result[1] = yield response.json();
+    json = yield response.json();
+    if (json) result.push(json);
     startdate = Moment().subtract(4, 'days').format('D-M-YYYY');
     response = yield fetch(`${baseUrl}/daily/${startdate}`);
-    result[2] = yield response.json();
-    if (response.status === 200) {
+    json = yield response.json();
+    if (json) result.push(json);
+    if (result) {
       yield put({ type: DAILY_UPDATE_FETCH_SUCCEEDED, result });
     } else {
       yield put({ type: DAILY_UPDATE_FETCH_FAILED, error: response.status });
     }
   } catch (e) {
-    yield Analytics.logEvent('DailyError', {
-      name: 'dailyError',
-      screen: 'main',
-      purpose: e.message,
-    });
     yield put({ type: DAILY_UPDATE_FETCH_FAILED, message: e.message });
   }
 }
@@ -93,8 +91,8 @@ function* fetchColombia() {
 
 function* fetchEachCase(action) {
   try {
-    const caseType = action.caso;
-    const response = yield fetch(`${baseUrl}/${caseType.toLowerCase()}`);
+    const caseType = action.caso.toLowerCase();
+    const response = yield fetch(`${baseUrl}${caseType}`);
     if (response.status === 200) {
       const data = yield response.json();
       yield all([
