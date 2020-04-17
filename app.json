@@ -3,7 +3,6 @@
     "name": "ColCovidMonitor",
     "slug": "react-native-covid19-col",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "backgroundColor": "#171717",
     "owner": "wdospinal",
     "platforms": [
