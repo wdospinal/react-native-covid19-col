@@ -17,6 +17,7 @@ const initialState = {
     colDeceased: 0,
     colRecovered: 0,
   },
+  series: [],
 };
 
 export default function (state = initialState, action) {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cases: action.cases,
+        series: [action.cases.recovered, action.cases.deceased],
       };
     case DAILY_UPDATE_FETCH_SUCCEEDED:
       return {

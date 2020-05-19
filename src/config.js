@@ -5,7 +5,7 @@ export const tabBarColor = '#2C2C2C';
 export const textColor = {
   confirmed: '#F2B900',
   recovered: '#00CC99',
-  deceased: 'tomato',
+  deceased: '#D0373A',
   secondary: '#D1D1D1',
   alternate: '#53DD6C',
   normal: 'white',

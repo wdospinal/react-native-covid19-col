@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View, Text, FlatList,
 } from 'react-native';
+import PieChart from 'react-native-pie-chart';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GET_CASES, GET_DAILY } from '../actions';
@@ -51,8 +52,12 @@ class Main extends React.PureComponent {
 
   render() {
     const {
-      navigation, cases, dailyUpdate,
+      navigation, cases, dailyUpdate, series,
     } = this.props;
+    const { confirmed, recovered, deceased } = cases;
+    const { recovered: r, deceased: d } = textColor;
+    const chartWh = 150;
+    const sliceColor = [r, d];
     function renderItem({ item }) {
       return (
         <DailyCard case={item} />
@@ -61,10 +66,17 @@ class Main extends React.PureComponent {
     return (
       <Container>
         <View style={styles.summaryCard}>
+          <PieChart
+            chart_wh={chartWh}
+            series={series}
+            sliceColor={sliceColor}
+            basic
+            coverRadius={0.45}
+          />
           <View>
-            <SummaryText text={cases.confirmed} subText="Confirmed" onPress={() => navigation.navigate('Cases', { case: 'Confirmed' })} />
-            <SummaryText text={cases.recovered} subText="Recovered" onPress={() => navigation.navigate('Cases', { case: 'Recovered' })} />
-            <SummaryText text={cases.deceased} subText="Deceased" onPress={() => navigation.navigate('Cases', { case: 'Deaths' })} />
+            <SummaryText text={confirmed} subText="Confirmed" onPress={() => navigation.navigate('Cases', { case: 'Confirmed' })} />
+            <SummaryText text={recovered} subText="Recovered" onPress={() => navigation.navigate('Cases', { case: 'Recovered' })} />
+            <SummaryText text={deceased} subText="Deceased" onPress={() => navigation.navigate('Cases', { case: 'Deaths' })} />
           </View>
         </View>
         <View style={{ marginTop: 20, paddingBottom: 100 }}>
@@ -85,6 +97,7 @@ class Main extends React.PureComponent {
 
 Main.propTypes = {
   navigation: PropTypes.instanceOf(Object).isRequired,
+  series: PropTypes.instanceOf(Array).isRequired,
   cases: PropTypes.instanceOf(Object),
   dailyUpdate: PropTypes.instanceOf(Object),
   getCases: PropTypes.func,
@@ -100,6 +113,7 @@ Main.defaultProps = {
 
 const mapStateToProps = (state) => ({
   cases: state.main.cases,
+  series: state.main.series,
   dailyUpdate: state.main.dailyUpdate,
 });
 
